@@ -1,0 +1,45 @@
+/********
+
+辗转相除法的原理：
+存在自然数a，b（a > b）,求a%b，设a/b = k...d(其中k为整数，d为余数)；
+那么a = b*k + d；
+那么我们可以看作求（b*k + d）与 b 的最大公约数；
+显然，b的约数一定是b*k的约数，所以我们要找的最大公约数不应该在b和b*k这两个数之间找，故我们要求的最大公约数就是要找到b跟d的最大公约数，
+这点通过一个循环实现，每次判断d是否为零，如果为零，那么上一次循环中作为除数的那个数就是我们要找的最大公约数。（如果不懂，可以对照gcd部分代码理解）
+
+（编程小白，请多多指教。感谢所有帮助过我的人。）
+
+*********/
+
+
+#include <iostream>
+#include <algorithm>
+#include <cstring>
+#include <cmath>
+#include <cstdio>
+using namespace std;
+
+int gcd(int a,int b){
+    if(a == 0 || b ==0) return 0;
+    int r;
+    while(b){
+        r = b;
+        b = a%b;
+        a = r;
+    }
+    return a;
+}
+
+int main(){
+    int a,b;
+    while(cin >> a >> b){
+        // 如果a < b ,交换a和b
+        if(a < b){
+            a = a^b;
+            b = a^b;
+            a = a^b;
+        }
+        cout << gcd(a,b) << endl;
+    }
+    return 0;
+}
