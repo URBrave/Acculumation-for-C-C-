@@ -5,7 +5,8 @@
 那么a = b*k + d；
 那么我们可以看作求（b*k + d）与 b 的最大公约数；
 显然，b的约数一定是b*k的约数，所以我们要找的最大公约数不应该在b和b*k这两个数之间找，故我们要求的最大公约数就是要找到b跟d的最大公约数，
-这点通过一个循环实现，每次判断d是否为零，如果为零，那么上一次循环中作为除数的那个数就是我们要找的最大公约数。（如果不懂，可以对照gcd部分代码理解）
+这点通过一个循环实现，每次判断d是否为零，如果为零，那么上一次循环中作为除数的那个数就是我们要找的最大公约数。（如果不懂，可以对照gcd1部分代码理解）
+gcd2函数是后来加的，对于一些已经彻底了解gcd原理的人可以直接拿来用，省时省力；但没有真正了解gcd原理的还是建议先去搞懂，毕竟真正学到的才是自己的。
 
 （编程小白，请多多指教。感谢所有帮助过我的人。）
 
@@ -19,7 +20,7 @@
 #include <cstdio>
 using namespace std;
 
-int gcd(int a,int b){
+int gcd1(int a,int b){
     if(a == 0 || b ==0) return 0; // 任何一方为零，gcd为零
     int r;  //r是一个交换时的第三方变量，无其他含义
     while(b){
@@ -28,6 +29,23 @@ int gcd(int a,int b){
         a = r;
     }
     return a;
+}
+
+int gcd2(int a,int b){
+    if(a == 0 || b ==0) return 0;
+    
+    while(a ^= b ^= a ^= b %= a); //这是gcd函数的核心代码，最后返回b；这个代码的具体展开式我写在了下面的注释部分，实现原理不做赘述
+    /*b = b % a;
+    a = a^b;
+    b = a^b;
+    a = a^b;
+    while(a){
+        b = b % a;
+        a = a^b;
+        b = a^b;
+        a = a^b;
+    }*/
+    return b;
 }
 
 int main(){
@@ -39,7 +57,8 @@ int main(){
             b = a^b;
             a = a^b;
         }
-        cout << gcd(a,b) << endl;
+        cout << gcd1(a,b) << endl;
+        cout << gcd2(a,b) << endl;
     }
     return 0;
 }
