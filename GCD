@@ -34,7 +34,7 @@ int gcd1(int a,int b){
 int gcd2(int a,int b){
     if(a == 0 || b ==0) return 0;
     
-    while(a ^= b ^= a ^= b %= a); //这是gcd函数的核心代码，最后返回b；这个代码的具体展开式我写在了下面的注释部分，实现原理不做赘述
+    while(a ^= b ^= a ^= b %= a); //这是gcd函数的核心代码（ababa），最后返回b；这个代码的具体展开式我写在了下面的注释部分，实现原理不做赘述
     /*b = b % a;
     a = a^b;
     b = a^b;
