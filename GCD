@@ -20,8 +20,8 @@
 using namespace std;
 
 int gcd(int a,int b){
-    if(a == 0 || b ==0) return 0;
-    int r;
+    if(a == 0 || b ==0) return 0; // 任何一方为零，gcd为零
+    int r;  //r是一个交换时的第三方变量，无其他含义
     while(b){
         r = b;
         b = a%b;
