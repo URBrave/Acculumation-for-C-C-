@@ -1,0 +1,39 @@
+/*********
+
+交换两个数 a 和 b
+第一种方法：通过位运算（异或），具体实现过程可以自己手动写一下，助于理解和验证；
+第二种：借助第三方变量，这其实是一种最快速的交换方法（意外？！）
+第三种：++--式，不借助第三方变量的另一种方式
+
+（编程小白，请多多指教。感谢所有帮助过我的人。）
+
+***********/
+#include <iostream>
+#include <algorithm>
+#include <cstring>
+#include <cmath>
+#include <cstdio>
+using namespace std;
+
+int main(){
+    int a;
+    int b;
+    while(cin >> a >> b){
+        //以下为第一种方式
+        a ^= b ^= a ^= b;
+        cout << "a is " << a << "  b is " << b << endl;
+        //以下为第二种
+        int c;
+        c = a;
+        a = b;
+        b = c;
+        cout << "a is " << a << "  b is " << b << endl;
+        //以下为第三种
+        a = a+b;
+        b = a-b;
+        a = a-b;
+        cout << "a is " << a << "  b is " << b << endl;
+    }
+    
+    return 0;
+}
