@@ -1,0 +1,51 @@
+/************
+
+http://images.cnitblog.com/i/524849/201403/010142306616667.jpg
+
+快速幂取模使用心得：看到过于大的数不要害怕，要学会细致分析，想想取模的作用，不就是帮你把大数化小了吗。
+
+（编程小白，请多多指教。感谢所有帮助过我的人。）
+
+*************/
+
+
+
+#include <iostream>
+#include <algorithm>
+#include <cstring>
+#include <cmath>
+#include <cstdio>
+using namespace std;
+
+// 极限情况下越界 c=2147483647,b=2147483647 选择下列方式
+/*long long PowerMod(int a, int b, int c)
+{
+    long long ans = 1,aa = a;
+    aa = aa%c;
+    while(b){
+        if(b & 1) ans = (ans*aa)%c;   // 如果b为奇数，则需要再多乘一次a
+        b >>= 1;                      // 等价于 b /= 2;此处位运算更快，所以选择位运算
+        aa = (aa*aa) %c;              // b/2的同时要让a = a^2
+    }
+    return ans;
+}*/
+
+int PowerMod(int a, int b, int c)
+{
+    int ans = 1;
+    a = a%c;
+    while(b){
+        if(b & 1) ans = (ans*a)%c;    // 如果b为奇数，则需要再多乘一次a
+        b >>= 1;                      // 等价于 b /= 2;此处位运算更快，所以选择位运算
+        a = (a*a) %c;                 // b/2的同时要让a = a^2
+    }
+    return ans;
+}
+
+int main(){
+    int a,b,c;
+    while(cin >> a >> b >> c){
+        cout << PowerMod(a,b,c) << endl;
+    }
+    return 0;
+}
